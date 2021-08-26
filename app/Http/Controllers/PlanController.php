@@ -60,7 +60,7 @@ class PlanController extends Controller
             } else {
                 throw new Exception('Datos vacios!');    
             }
-        } catch (Exception $e) {
+        } catch (Exception $e) {    
             DB::rollback();
             return redirect()->route('planes_create')->with('error', 'Datos incorrectos!');
         }

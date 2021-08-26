@@ -70,6 +70,7 @@
             <a class="collapse-item  @yield('tamano') @yield('txt')" href="{{route('ingreso_salida_index')}}">Ingreso Salida</a>
             @endcan
             <a class="collapse-item  @yield('tamano') @yield('txt')" href="{{route('mensajes')}}">Mensajes</a>
+            <a class="collapse-item  @yield('tamano') @yield('txt')" href="{{route('comentarios')}}">Comentarios</a>
             @can('ver reserva')
             <a class="collapse-item  @yield('tamano') @yield('txt')" href="{{route('reservas')}}">Reservas</a>
             @endcan

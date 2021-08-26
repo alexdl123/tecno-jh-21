@@ -94,5 +94,12 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('/mensajes/{id}/edit', 'MensajeController@edit')->name('mensajes_edit');
     Route::post('/mensajes/{id}', 'MensajeController@update')->name('mensajes_update');
     Route::post('/mensajes/destroy/{id}', 'MensajeController@destroy')->name('mensajes_delete');
+
+    Route::get('/comentarios', 'ComentarioController@index')->name('comentarios');
+    Route::get('/comentarios/create', 'ComentarioController@create')->name('comentarios_create');
+    Route::post('/comentarios', 'ComentarioController@store')->name('comentarios_store');
+    Route::get('/comentarios/{id}/edit', 'ComentarioController@edit')->name('comentarios_edit');
+    Route::post('/comentarios/{id}', 'ComentarioController@update')->name('comentarios_update');
+    Route::post('/comentarios/destroy/{id}', 'ComentarioController@destroy')->name('comentarios_delete');
 });
 //->middleware('permission:ver usuario');

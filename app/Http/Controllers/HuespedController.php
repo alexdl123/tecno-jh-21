@@ -293,7 +293,7 @@ class HuespedController extends Controller
                     foreach ($habitaciones as $habitacion) {
                         $habitacion->estado = 'Disponible';
                         $habitacion->update();
-                    }
+                    }   
                     $row->estado = 'D';
                     $row->update();
                 }
