@@ -84,8 +84,15 @@ class HabitacionController extends Controller
     {
         $contador=$this->contador("habitacionshow=");
         $habitacion=Habitacion::find($id);
-        $categoria= Categoria::find($habitacion->categoria_id);
-        return view('src.habitacion.show', compact('contador','categoria','habitacion'));
+        if ($habitacion != null) {
+            $categoria= Categoria::find($habitacion->categoria_id);
+            return view('src.habitacion.show', compact('contador','categoria','habitacion'));
+        } else {
+            $contador=$this->contador("habitacionindex=");
+            $habitacion= Habitacion::listado();
+            Bitacora::store('listar', 'habitaciones');
+            return redirect()->route('habitaciones', compact('contador', 'habitacion'))->with('error', 'No se encontro la habitacion');
+        }
     }
 
     /**

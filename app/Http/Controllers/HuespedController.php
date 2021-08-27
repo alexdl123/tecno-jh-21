@@ -25,7 +25,7 @@ class HuespedController extends Controller
      */
     public function index()
     {
-        $contador=$this->contador("huespedindex=");
+        $contador = $this->contador("huespedindex=");
         $huesped= Huesped::listado();
         Bitacora::store('listar', 'huespedes');
         return view('src.huesped.index', compact('contador', 'huesped'));
@@ -298,6 +298,7 @@ class HuespedController extends Controller
                     $row->update();
                 }
                 if ($huesped->delete() && $user->delete()) {
+                    User::where('id', $huesped->user_id)->delete();
                     Bitacora::store('eliminar', 'huespedes');
                     DB::commit();
                     return redirect()->route('huespedes')->with('success', 'Huesped eliminado exitosamente!');

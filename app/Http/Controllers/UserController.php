@@ -87,6 +87,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
+        // dd($id);
         $contador=$this->contador("usuarioshow=");
         $usuario=User::find($id);
         return view('src.usuario.show', compact('contador','usuario'));
@@ -187,21 +188,21 @@ class UserController extends Controller
     {   $contador = $this->contador("resultado=");
         $dato = strtolower($request->dato);
         // dd($dato);
-        $categorias = DB::select("select * from categoria where lower(descripcion) like '%$dato%'  or lower(nombre) like '%$dato%'
-                and deleted_at = null ");
-        $usuarios = DB::select("select * from users where lower(email) like '%$dato%' or lower(nombre) like '%$dato%' 
-            and deleted_at = null ");
-        $huespedes = DB::select("select * from huesped where nombre like '%$dato%' 
-            or lower(apellido) like '%$dato%' or CAST(telefono AS text) like '%$dato%' and deleted_at = null ");
-        $promociones = DB::select("select * from promocion where lower(nombre) like '%$dato%' or CAST(porcentaje AS text) like '%$dato%' 
-            and deleted_at = null ");
-        $habitaciones = DB::select("select * from habitaciones where lower(descripcion) like '%$dato%' or CAST(nrohabitacion AS text) like '%$dato%' 
-            and deleted_at = null ");      
+        $categorias = DB::select("select * from categoria where (lower(descripcion) like '%$dato%'  or lower(nombre) like '%$dato%'
+                 ) and deleted_at IS NULL ");
+        $usuarios = DB::select("select * from users where (lower(email) like '%$dato%' or lower(nombre) like '%$dato%' 
+            ) and deleted_at IS NULL ");
+        $huespedes = DB::select("select * from huesped where (nombre like '%$dato%' 
+            or lower(apellido) like '%$dato%' or CAST(telefono AS text) like '%$dato%') and deleted_at IS NULL ");
+        $promociones = DB::select("select * from promocion where (lower(nombre) like '%$dato%' or CAST(porcentaje AS text) like '%$dato%' 
+            ) and deleted_at IS NULL ");
+        $habitaciones = DB::select("select * from habitaciones where (lower(descripcion) like '%$dato%' or CAST(nrohabitacion AS text) like '%$dato%' 
+            ) and deleted_at IS NULL ");      
         $reservas = DB::select("select * from reserva where lower(descripcion) like '%$dato%' 
-            and deleted_at = null");
+            and deleted_at IS NULL");
         if(Auth::user()->rol_id == 3){
             $huesped = Huesped::getHuesped(Auth::user()->id);
-            $reservas = DB::select("select * from reserva where lower(descripcion) like '%$dato%' and deleted_at = null and huesped_id =".$huesped->id);
+            $reservas = DB::select("select * from reserva where lower(descripcion) like '%$dato%' and deleted_at IS NULL and huesped_id =".$huesped->id);
         }
         return view('src.buscador.index', compact('dato', 'categorias', 'usuarios', 'huespedes', 'habitaciones', 'promociones', 'reservas','contador'));
     }

@@ -53,14 +53,6 @@
                                     name="telefono_huesped" id="telefono_huesped" type="number">
                         </div>
                         <div class="col-lg-6">
-                            <label for="habitacionid">Habitacion</label>
-                            <select class="form-control" name="habitacionid">
-                                @foreach ($habitaciones as $key => $v)
-                                <option value="{{$v->id}}">{{$v->nrohabitacion}}</option>
-                                @endforeach
-                            </select>                                
-                        </div>
-                        <div class="col-lg-6">
                             <br>
                             <label for="imagen_usuario">Imagen</label>
                             <input type="file" name="imagenes[]" id="imagen_usuario"

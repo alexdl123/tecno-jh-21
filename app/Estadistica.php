@@ -60,7 +60,7 @@ class Estadistica extends Model
         $meses = array('Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre');
         $year = now()->year;
 
-        $datos = DB::select("select count(id) as cant, date_part('month', created_at) as mes from reserva where date_part('year', created_at) = $year group by date_part('month', created_at)");
+        $datos = DB::select("select count(id) as cant, date_part('month', fecha_ingreso) as mes from reserva where date_part('year', fecha_ingreso) = $year group by date_part('month', fecha_ingreso)");
         $datos_array = array();
         for ($i = 0; $i < count($meses); $i++) {
             $inside = false;

@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Mensaje;
 use App\Huesped;
 use Carbon\Carbon;
+use Exception;
 
 class MensajeController extends Controller
 {
@@ -22,13 +23,14 @@ class MensajeController extends Controller
                 $condition['huesped_id'] = $huesped->id;
             }
 
-            $contador = 13;
+            $contador=$this->contador("mensajeindex=");
             $mensajes = Mensaje::with('huesped')
-                                ->orWhere($condition)
+                                // ->orWhere($condition)
                                 ->get();
             // foreach ($mensajes as $mensaje) {
             //     $mensaje->by = $mensaje->by == 'U' ? 'Residencial' : 'Huesped';
-            // }                            
+            // }        
+            // dd($mensajes);                    
             return view('src.mensaje.index', compact('mensajes', 'contador'));
         } catch (\Throwable $th) {
             $mensajes = [];
@@ -40,7 +42,7 @@ class MensajeController extends Controller
 
     public function create() {
         $huespeds = Huesped::all();
-        $contador = 12;
+        $contador=$this->contador("mensajecreate=");
         return view('src.mensaje.create', compact('huespeds', 'contador'));
     }
 
@@ -70,7 +72,7 @@ class MensajeController extends Controller
                 return redirect()->route('mensajes')->with('error', 'El mensaje no existe');
             }
             $huespeds = Huesped::all();
-            $contador = 12;
+            $contador=$this->contador("mensajeedit=");
             return view('src.mensaje.edit', compact('mensaje', 'contador', 'huespeds'));
         } catch (\Throwable $th) {
             return redirect()->route('mensajes')->with('error', $th->getMessage());
@@ -110,5 +112,32 @@ class MensajeController extends Controller
         } catch (\Throwable $th) {
             return redirect()->route('mensajes')->with('error', $th->getMessage());
         }
+    }
+
+    public static function contador($valor){
+        
+        $contents = file_get_contents(storage_path('contadores.txt'));
+        $new_contents= "";
+        if( strpos($contents, $valor) !== false) { 
+            $contents_array = preg_split("/\\r\\n|\\r|\\n/", $contents);
+            foreach ($contents_array as &$record) {   
+                if (strpos($record, $valor) !== false) { 
+                    $pos = strpos($record, '=');
+                    $nro = substr($record,$pos+1,strlen($record)-1);
+                    $nuevoValor=($nro*1)+1;
+                    $cadena = $valor.$nuevoValor."\r";
+                    $new_contents .= $cadena; 
+                }else{
+                    $new_contents .= $record ."\r";
+                }
+            }
+            $str = trim($new_contents);
+            file_put_contents(storage_path('contadores.txt'),$str); 
+        }
+        else{
+            //echo json_encode("doesn't exist!");
+            throw new Exception('Contador no encontrado!');
+        }
+        return $nuevoValor;
     }
 }

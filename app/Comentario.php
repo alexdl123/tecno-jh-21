@@ -16,6 +16,6 @@ class Comentario extends Model
     ];
 
     public function huesped() {
-        return $this->belognsTo(Huesped::class, 'huesped_id', 'id');
+        return $this->belongsTo(Huesped::class, 'huesped_id', 'id');
     }
 }

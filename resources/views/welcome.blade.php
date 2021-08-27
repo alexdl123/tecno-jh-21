@@ -138,7 +138,7 @@
           			<span class="icon-map-signs"></span>
           		</div>
           		<h3 class="mb-4">Direccion</h3>
-	            <p>Entre calle Junin y Simon Bolivar</p>
+	            <p>Av. Cumavi No. 371</p>
 	          </div>
           </div>
           
@@ -177,7 +177,7 @@
                 }
                 @endphp
             	<p>Copyright &copy;<script>document.write(new Date().getFullYear());</script> 
-				  All rights reserved | This template is made with
+					Grupo 9 SC
 				   <i class="icon-heart color-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
   				</p>
 			<p style="text-align: right">Contador : {{$file}}</p>
@@ -186,8 +186,11 @@
         </div>
       </div>
     </footer>
-    
-  
+
+<!-- grupo09sc
+grup009grup009 -->
+
+<!-- mail.tecnoweb.org.bo -->
 
   <!-- loader -->
   <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>

@@ -47,7 +47,7 @@
                             <td>{{$c->titulo}}</td>
                             <td>{{$c->contenido}}</td>
                             <td>{{$c->fechahora}}</td>                   
-                            <td>{{$c->huesped->nombre}} {{$c->huesped->apellido}}</td>
+                            <td>{{$c->huesped ? $c->huesped->nombre : ''}} {{$c->huesped ? $c->huesped->apellido : ''}}</td>
                             <td>{{$c->by}}</td>                 
                             <td>
                                 <a href="{{route('mensajes_edit', ['id' => $c->id]) }}"

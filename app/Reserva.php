@@ -35,7 +35,7 @@ class Reserva extends Model
         return $huespedes;
     }
 
-    public static function mislistado(){
+    public static function mislistado($id){
 
         $huespedes = DB::table("reserva")
             ->select(['reserva.id','reserva.fecha_ingreso','reserva.fecha_salida','c.nombre','c.apellido'])

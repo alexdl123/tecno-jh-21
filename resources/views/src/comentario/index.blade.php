@@ -46,7 +46,7 @@
                             <td>{{$c->titulo}}</td>
                             <td>{{$c->comentario}}</td>
                             <td>{{$c->fechahora}}</td>                   
-                            <td>{{$c->huesped->nombre}} {{$c->huesped->apellido}}</td>                            
+                            <td>{{$c->huesped ? $c->huesped->nombre : ''}} {{$c->huesped ? $c->huesped->apellido : ''}}</td>                            
                             <td>
                                 <a href="{{route('comentarios_edit', ['id' => $c->id]) }}"
                                 class="btn btn-warning btn-xs">Editar</a>
